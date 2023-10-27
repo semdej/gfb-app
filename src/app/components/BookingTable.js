@@ -2,7 +2,7 @@
 import { Table } from "@mantine/core";
 
 function formatDate(date) {
-  return new Date(date).toLocaleString("en-US", {
+  return new Date(date).toLocaleString("nl-NL", {
     day: "numeric",
     month: "numeric",
     year: "numeric",
@@ -16,10 +16,10 @@ export function BookingTable({ bookings }) {
         <Table>
           <Table.Thead>
             <Table.Tr>
-              <Table.Th>ID</Table.Th>
-              <Table.Th>User</Table.Th>
-              <Table.Th>Date</Table.Th>
-              <Table.Th>Notes</Table.Th>
+              <Table.Th>BookingID</Table.Th>
+              <Table.Th>UserID</Table.Th>
+              <Table.Th>Datums</Table.Th>
+              <Table.Th>Notities</Table.Th>
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>
