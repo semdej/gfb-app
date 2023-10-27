@@ -1,13 +1,13 @@
 "use client";
 
 import { Input, Button, Container, Title, Center } from "@mantine/core";
-import { IconCursorText, IconFileDescription } from "@tabler/icons-react";
+import { IconFileDescription } from "@tabler/icons-react";
 import { supabase } from "src/app/utils/supabase-client";
 import { useState } from "react";
 import { DatePicker } from "@mantine/dates";
 import "@mantine/dates/styles.css";
 
-export function BookingForm() {
+export function BookingForm({ user }) {
   const [value, setValue] = useState([]);
 
   async function handleSubmit(event, value) {
@@ -15,7 +15,7 @@ export function BookingForm() {
     const formData = new FormData(event.target);
 
     const { data, error } = await supabase.from("bookings").insert({
-      user: formData.get("user"),
+      user: user.id,
       date: value, // Pass the value from the DatePicker
       notes: formData.get("notes"),
     });
@@ -30,34 +30,30 @@ export function BookingForm() {
     <>
       <Container>
         <Center>
-          <Title mt={50} mb={50}>
+          <Title mt={30} mb={50}>
             Voeg een nieuwe boeking toe
           </Title>
         </Center>
         <form onSubmit={(event) => handleSubmit(event, value)}>
-          <Input
-            required
-            icon={<IconCursorText size="1rem" />}
-            mt={15}
-            mb={15}
-            placeholder="User"
-            name="user"
-          />{" "}
-          <DatePicker
-            required
-            type="multiple"
-            value={value}
-            onChange={setValue}
-          />{" "}
+          <Center mb={80}>
+            <DatePicker
+              required
+              type="multiple"
+              value={value}
+              onChange={setValue}
+            />{" "}
+          </Center>
           <Input
             required
             icon={<IconFileDescription size="1rem" />}
-            placeholder="Notes"
+            placeholder="Notities"
             name="notes"
             mt={15}
-            mb={15}
+            mb={30}
           />{" "}
-          <Button type="submit">Toevoegen</Button>
+          <Center>
+            <Button type="submit">Toevoegen</Button>
+          </Center>
         </form>
       </Container>
     </>

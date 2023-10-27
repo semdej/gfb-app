@@ -1,15 +1,12 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import AccountForm from "./account-form";
 import { notFound } from "next/navigation";
-import { BookingTable } from "src/app/components/BookingTable";
 import Header from "../components/Header";
 
-export default async function Index() {
-  let bookings = [];
-
+export default async function Account() {
   const cookieStore = cookies();
   const supabase = createServerComponentClient({ cookies: () => cookieStore });
-  const { data: fetchedBookings } = await supabase.from("bookings").select();
 
   const {
     data: { session },
@@ -19,19 +16,10 @@ export default async function Index() {
     notFound();
   }
 
-  if (fetchedBookings) {
-    bookings = fetchedBookings.map((booking) => ({
-      id: booking.id,
-      user: booking.user,
-      date: booking.date,
-      notes: booking.notes,
-    }));
-  }
-
   return (
     <>
       <Header />
-      <BookingTable bookings={bookings} />
+      <AccountForm session={session} />
     </>
   );
 }
