@@ -18,7 +18,7 @@ export function BookingTable({ bookings }) {
             <Table.Tr>
               <Table.Th>BookingID</Table.Th>
               <Table.Th>UserID</Table.Th>
-              <Table.Th>Datums</Table.Th>
+              <Table.Th>Datum</Table.Th>
               <Table.Th>Notities</Table.Th>
             </Table.Tr>
           </Table.Thead>

@@ -36,12 +36,7 @@ export function BookingForm({ user }) {
         </Center>
         <form onSubmit={(event) => handleSubmit(event, value)}>
           <Center mb={80}>
-            <DatePicker
-              required
-              type="multiple"
-              value={value}
-              onChange={setValue}
-            />{" "}
+            <DatePicker required value={value} onChange={setValue} />{" "}
           </Center>
           <Input
             required
