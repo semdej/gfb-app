@@ -1,7 +1,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
-import { Center } from "@mantine/core";
+import { Container } from "@mantine/core";
 import { BookingForm } from "src/app/components/BookingForm";
 import Header from "../components/Header";
 
@@ -24,9 +24,9 @@ export default async function Index() {
   return (
     <>
       <Header />
-      <Center>
+      <Container>
         <BookingForm user={user} />
-      </Center>
+      </Container>
     </>
   );
 }

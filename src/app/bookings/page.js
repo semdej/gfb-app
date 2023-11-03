@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { BookingTable } from "src/app/components/BookingTable";
 import Header from "../components/Header";
+import { Container } from "@mantine/core";
 
 export default async function Index() {
   let bookings = [];
@@ -35,7 +36,9 @@ export default async function Index() {
   return (
     <>
       <Header />
-      <BookingTable user={user} bookings={bookings} />
+      <Container>
+        <BookingTable user={user} bookings={bookings} />
+      </Container>
     </>
   );
 }

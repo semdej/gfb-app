@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import AccountForm from "./account-form";
 import { notFound } from "next/navigation";
 import Header from "../components/Header";
+import { Container } from "@mantine/core";
 
 export default async function Account() {
   const cookieStore = cookies();
@@ -19,7 +20,9 @@ export default async function Account() {
   return (
     <>
       <Header />
-      <AccountForm session={session} />
+      <Container>
+        <AccountForm session={session} />
+      </Container>
     </>
   );
 }
