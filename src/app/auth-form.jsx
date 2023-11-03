@@ -9,6 +9,7 @@ export default function AuthForm() {
   return (
     <Auth
       supabaseClient={supabase}
+      redirectTo={"http://localhost:3000/auth/callback"}
       view="sign_in"
       appearance={{
         theme: ThemeSupa,
@@ -24,7 +25,6 @@ export default function AuthForm() {
       theme="light"
       showLinks={false}
       providers={[]}
-      redirectTo={"http://localhost:3000/auth/callback"}
     />
   );
 }

@@ -12,7 +12,7 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import classes from "./Header.module.css";
 
-export default function Header() {
+export default function HeaderHome() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
 
@@ -30,14 +30,6 @@ export default function Header() {
             <a href="/account" className={classes.link}>
               Account
             </a>
-          </Group>
-
-          <Group visibleFrom="sm">
-            <form action="/auth/signout" method="post">
-              <Button type="submit" color="red">
-                Uitloggen
-              </Button>
-            </form>
           </Group>
 
           <Burger
@@ -69,13 +61,6 @@ export default function Header() {
           <a href="/account" className={classes.link}>
             Account
           </a>
-          <Group justify="center" grow pb="xl" px="md">
-            <form action="/auth/signout" method="post">
-              <Button type="submit" color="red">
-                Uitloggen
-              </Button>
-            </form>
-          </Group>
         </ScrollArea>
       </Drawer>
     </Box>
