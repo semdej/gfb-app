@@ -19,6 +19,10 @@ export default async function Index() {
     notFound();
   }
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   if (fetchedBookings) {
     bookings = fetchedBookings.map((booking) => ({
       id: booking.id,
@@ -31,7 +35,7 @@ export default async function Index() {
   return (
     <>
       <Header />
-      <BookingTable bookings={bookings} />
+      <BookingTable user={user} bookings={bookings} />
     </>
   );
 }
