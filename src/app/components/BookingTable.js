@@ -2,6 +2,7 @@
 import { Table, Button } from "@mantine/core";
 import { createClient } from "@supabase/supabase-js";
 import { MdDeleteOutline } from "react-icons/md";
+import { useState, useEffect } from "react";
 
 function formatDate(date) {
   return new Date(date).toLocaleString("nl-NL", {
@@ -33,6 +34,30 @@ export function BookingTable({ bookings, user }) {
       console.error("An error occurred:", error);
     }
   };
+  const [usernames, setUsernames] = useState({});
+
+  useEffect(() => {
+    async function fetchUsernames() {
+      const userIds = bookings.map((booking) => booking.user);
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("id, username")
+        .in("id", userIds);
+
+      if (error) {
+        console.error("Error fetching usernames:", error.message);
+      } else {
+        const usernameMap = {};
+        data.forEach((profile) => {
+          usernameMap[profile.id] = profile.username;
+        });
+        setUsernames(usernameMap);
+      }
+    }
+
+    fetchUsernames();
+  }, [bookings]);
+
   return (
     <>
       <Table.ScrollContainer minWidth={500} type="native">
@@ -40,7 +65,7 @@ export function BookingTable({ bookings, user }) {
           <Table.Thead>
             <Table.Tr>
               <Table.Th>BookingID</Table.Th>
-              <Table.Th>UserID</Table.Th>
+              <Table.Th>Gebruiker</Table.Th>
               <Table.Th>Datum</Table.Th>
               <Table.Th>Notities</Table.Th>
               <Table.Th>Acties</Table.Th>
@@ -50,7 +75,7 @@ export function BookingTable({ bookings, user }) {
             {bookings.map((booking) => (
               <Table.Tr key={booking.id}>
                 <Table.Td>{booking.id}</Table.Td>
-                <Table.Td>{booking.user}</Table.Td>
+                <Table.Td>{usernames[booking.user]}</Table.Td>{" "}
                 <Table.Td>
                   {booking.date.map((dateItem, index) => (
                     <div key={index}>{formatDate(dateItem)}</div>
